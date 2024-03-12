@@ -8,6 +8,9 @@ const reducer = (state, action) => {
       return { ...state, count: state.count + 1 };
     case "DECREMENT":
       return { ...state, count: state.count - 1 };
+
+    case "RESET":
+      return { ...state, count: (state.count = 0) };
     default:
       return state;
   }
@@ -29,25 +32,38 @@ export default function App() {
       dispatch({ type: "INCREMENT" });
     }
   };
+
+  const handleReset = () => {
+    dispatch({ type: "RESET" });
+  };
   return (
-    <div className="bg-slate-100 m-5 rounded p-3">
-      <h1 className="text-center font-bold">{state.count}</h1>
-      <div
-        className={`flex items-center ${
-          state.count === 0 ? "justify-end" : "justify-between"
-        }`}
+    <div className="bg-slate-100 rounded h-screen p-3 flex-col flex items-center justify-center">
+      settings
+      <button
+        className="bg-red-500 text-white rounded p-2"
+        onClick={handleReset}
       >
-        {buttonText.map((button, index) => (
-          <button
-            onClick={() => handleClick(index)}
-            key={index}
-            className={`rounded bg-purple-900 text-white p-2 w-10 ${
-              index === 0 && state.count === 0 ? "hidden" : "block"
-            }`}
-          >
-            {button}
-          </button>
-        ))}
+        reset
+      </button>
+      <div className="w-72">
+        <h1 className="text-center font-bold text-9xl">{state.count}</h1>
+        <div
+          className={`flex items-center w-full ${
+            state.count === 0 ? "justify-end" : "justify-between"
+          }`}
+        >
+          {buttonText.map((button, index) => (
+            <button
+              onClick={() => handleClick(index)}
+              key={index}
+              className={`rounded bg-purple-900 text-white p-2 w-10 ${
+                index === 0 && state.count === 0 ? "hidden" : "block"
+              }`}
+            >
+              {button}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
