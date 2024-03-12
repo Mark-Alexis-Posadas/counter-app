@@ -45,19 +45,23 @@ Inspired by [simplecounter.app](https://simplecounter.app/).
 
 2. Change into the project directory:
 
-````bash
+```bash
  cd counter-app
+```
 
 3. Install dependencies
+
 ```bash
 npm install
+```
 
 4. Start the development server:
-  ```bash
+
+```bash
 npm start
+```
 
 5. Open your browser and visit [(http://localhost:3000)] to see the app in action.
-````
 
 ## Usage
 
