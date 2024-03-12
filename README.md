@@ -61,7 +61,7 @@ npm install
 npm start
 ```
 
-5. Open your browser and visit [(http://localhost:3000)] to see the app in action.
+5. Open your browser and visit [http://localhost:3000](http://localhost:3000) to see the app in action.
 
 ## Usage
 
