@@ -39,9 +39,9 @@ Inspired by [simplecounter.app](https://simplecounter.app/).
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/counter-app.git
-   ```
+```bash
+git clone https://github.com/your-username/counter-app.git
+```
 
 2. Change into the project directory:
 
@@ -101,3 +101,7 @@ Let's walk through a simple example to illustrate the usage:
 - Enter a maximum count limit, preventing the count from exceeding the specified value.
 
 Feel free to explore and interact with the app to discover its various features.
+
+## License
+
+This update acknowledges your inspiration and provides a direct link to [simplecounter.app](https://simplecounter.app/).
