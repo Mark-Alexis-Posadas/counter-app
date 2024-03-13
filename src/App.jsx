@@ -5,6 +5,7 @@ import {
   faGear,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import Theme from "./components/Theme";
 const initialCount = { count: 0, isToggle: false };
 
 const reducer = (state, action) => {
@@ -60,12 +61,14 @@ export default function App() {
 
   return (
     <div className="bg-slate-100 rounded h-screen p-3 flex-col flex items-center ">
-      <div className="flex items-center">
-        <FontAwesomeIcon icon={faGear} onClick={handleToggleSettings} />
+      <div className="flex items-center gap-2">
         <button
-          className="bg-red-500 text-white rounded p-2"
-          onClick={handleReset}
+          onClick={handleToggleSettings}
+          className="p-2 bg-purple-700 text-white rounded"
         >
+          <FontAwesomeIcon icon={faGear} />
+        </button>
+        <button>
           <FontAwesomeIcon icon={faArrowRotateRight} />
         </button>
       </div>
@@ -86,18 +89,21 @@ export default function App() {
             </div>
           </div>
           <div className="flex items-center">
-            <div className="w-6 h-6 rounded bg-black"></div>
-            <div className="w-6 h-6 rounded bg-white"></div>
-            <div className="w-6 h-6 rounded bg-yellow-700"></div>
-            <div className="w-6 h-6 rounded bg-green-700"></div>
-            <div className="w-6 h-6 rounded bg-blue-700"></div>
-            <div className="w-6 h-6 rounded bg-pink-700"></div>
-            <div className="w-6 h-6 rounded bg-gray-700"></div>
-            <div className="w-6 h-6 rounded bg-slate-500"></div>
+            <Theme />
           </div>
           <FontAwesomeIcon icon={faCircleXmark} onClick={handleToggleClose} />
         </div>
       )}
+
+      <div>
+        <h1>Reset Counter ?</h1>
+        <ul>
+          <li className="cursor-pointer" onClick={handleReset}>
+            Yes
+          </li>
+          <li className="cursor-pointer">Cancel</li>
+        </ul>
+      </div>
 
       {state.isToggle ? (
         ""
