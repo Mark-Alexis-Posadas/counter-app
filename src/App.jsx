@@ -6,6 +6,9 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import Theme from "./components/Theme";
+import Settings from "./components/Settings";
+import MyContext from "./Context";
+import Main from "./components/Main";
 const initialCount = { count: 0, isToggle: false };
 
 const reducer = (state, action) => {
@@ -60,75 +63,42 @@ export default function App() {
   };
 
   return (
-    <div className="bg-slate-100 rounded h-screen p-3 flex-col flex items-center ">
-      <div className="flex items-center gap-2">
-        <button
-          onClick={handleToggleSettings}
-          className="p-2 bg-purple-700 text-white rounded"
-        >
-          <FontAwesomeIcon icon={faGear} />
-        </button>
-        <button>
-          <FontAwesomeIcon icon={faArrowRotateRight} />
-        </button>
-      </div>
-      {state.isToggle && (
-        <div>
-          <h1>Settings</h1>
-          <div className="flex items-center">
-            <label>Set count = </label>
-            <input type="number" />
-          </div>
-
-          <div className="flex items-center">
-            <label>Limit Off / On</label>
-
-            <div className="flex">
-              <label>Maximum = </label>
-              <input type="number" />
-            </div>
-          </div>
-          <div className="flex items-center">
-            <Theme />
-          </div>
-          <FontAwesomeIcon icon={faCircleXmark} onClick={handleToggleClose} />
-        </div>
-      )}
-
-      <div>
-        <h1>Reset Counter ?</h1>
-        <ul>
-          <li className="cursor-pointer" onClick={handleReset}>
-            Yes
-          </li>
-          <li className="cursor-pointer">Cancel</li>
-        </ul>
-      </div>
-
-      {state.isToggle ? (
-        ""
-      ) : (
-        <div className="w-72">
-          <h1 className="text-center font-bold text-9xl">{state.count}</h1>
-          <div
-            className={`flex items-center w-full ${
-              state.count === 0 ? "justify-end" : "justify-between"
-            }`}
+    <MyContext.Provider
+      value={{
+        state,
+        buttonText,
+        handleClick,
+        handleToggleClose,
+        faCircleXmark,
+        FontAwesomeIcon,
+      }}
+    >
+      <div className="bg-slate-100 rounded h-screen p-3 flex-col flex items-center ">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleToggleSettings}
+            className="p-2 bg-purple-700 text-white rounded"
           >
-            {buttonText.map((button, index) => (
-              <button
-                onClick={() => handleClick(index)}
-                key={index}
-                className={`rounded bg-purple-900 text-white p-2 w-10 ${
-                  index === 0 && state.count === 0 ? "hidden" : "block"
-                }`}
-              >
-                {button}
-              </button>
-            ))}
-          </div>
+            <FontAwesomeIcon icon={faGear} />
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faArrowRotateRight} />
+          </button>
         </div>
-      )}
-    </div>
+        {state.isToggle && <Settings />}
+
+        <div>
+          <h1>Reset Counter ?</h1>
+          <ul>
+            <li className="cursor-pointer" onClick={handleReset}>
+              Yes
+            </li>
+            <li className="cursor-pointer">Cancel</li>
+          </ul>
+        </div>
+
+        {state.isToggle ? "" : <Main />}
+      </div>
+    </MyContext.Provider>
   );
 }
