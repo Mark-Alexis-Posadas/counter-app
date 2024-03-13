@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from "react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
 const initialCount = { count: 0 };
 
 const reducer = (state, action) => {
@@ -38,6 +39,7 @@ export default function App() {
   };
   return (
     <div className="bg-slate-100 rounded h-screen p-3 flex-col flex items-center justify-center">
+      <FontAwesomeIcon icon={faMoon} />
       settings
       <button
         className="bg-red-500 text-white rounded p-2"
