@@ -5,11 +5,15 @@ import {
   faGear,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import Theme from "./components/Theme";
+
 import Settings from "./components/Settings";
 import MyContext from "./Context";
 import Main from "./components/Main";
-const initialCount = { count: 0, isToggle: false };
+const initialCount = {
+  count: 0,
+  isToggle: false,
+  selectedColor: "bg-slate-100",
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -26,6 +30,8 @@ const reducer = (state, action) => {
 
     case "TOGGLE_CLOSE":
       return { ...state, isToggle: false };
+    case "CHANGE_THEME":
+      return { ...state, selectedColor: action.payload };
     default:
       return state;
   }
@@ -42,7 +48,7 @@ export default function App() {
     }
   }, [state]);
 
-  const handleClick = (idx) => {
+  const handleToggleCount = (idx) => {
     if (idx === 0) {
       dispatch({ type: "DECREMENT" });
     } else if (idx === 1) {
@@ -62,18 +68,25 @@ export default function App() {
     dispatch({ type: "TOGGLE_CLOSE" });
   };
 
+  const handleChangeTheme = (color) => {
+    dispatch({ type: "CHANGE_THEME", payload: color });
+  };
+
   return (
     <MyContext.Provider
       value={{
         state,
         buttonText,
-        handleClick,
+        handleToggleCount,
         handleToggleClose,
+        handleChangeTheme,
         faCircleXmark,
         FontAwesomeIcon,
       }}
     >
-      <div className="bg-slate-100 rounded h-screen p-3 flex-col flex items-center ">
+      <div
+        className={`${state.selectedColor} rounded h-screen p-3 flex-col flex items-center`}
+      >
         <div className="flex items-center gap-2">
           <button
             onClick={handleToggleSettings}

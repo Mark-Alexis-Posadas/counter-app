@@ -2,7 +2,7 @@ import { useContext } from "react";
 import MyContext from "../Context";
 
 export default function Main() {
-  const { state, buttonText, handleClick } = useContext(MyContext);
+  const { state, buttonText, handleToggleCount } = useContext(MyContext);
   return (
     <div className="w-72">
       <h1 className="text-center font-bold text-9xl">{state.count}</h1>
@@ -13,7 +13,7 @@ export default function Main() {
       >
         {buttonText.map((button, index) => (
           <button
-            onClick={() => handleClick(index)}
+            onClick={() => handleToggleCount(index)}
             key={index}
             className={`rounded bg-purple-900 text-white p-2 w-10 ${
               index === 0 && state.count === 0 ? "hidden" : "block"
