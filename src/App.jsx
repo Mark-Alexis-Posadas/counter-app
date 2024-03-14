@@ -9,9 +9,11 @@ import {
 import Settings from "./components/Settings";
 import MyContext from "./Context";
 import Main from "./components/Main";
+import Reset from "./components/Reset";
 const initialCount = {
   count: 0,
-  isToggle: false,
+  isToggleOne: false,
+  isToggleTwo: false,
   selectedColor: "bg-slate-100",
 };
 
@@ -25,8 +27,8 @@ const reducer = (state, action) => {
     case "RESET":
       return { ...state, count: (state.count = 0) };
 
-    case "TOGGLE_SETTINGS":
-      return { ...state, isToggle: !state.isToggle };
+    case "TOGGLE":
+      return { ...state, [action.payload]: !state[action.payload] };
 
     case "TOGGLE_CLOSE":
       return { ...state, isToggle: false };
@@ -60,10 +62,6 @@ export default function App() {
     dispatch({ type: "RESET" });
   };
 
-  const handleToggleSettings = () => {
-    dispatch({ type: "TOGGLE_SETTINGS" });
-  };
-
   const handleToggleClose = () => {
     dispatch({ type: "TOGGLE_CLOSE" });
   };
@@ -80,6 +78,7 @@ export default function App() {
         handleToggleCount,
         handleToggleClose,
         handleChangeTheme,
+        handleReset,
         faCircleXmark,
         FontAwesomeIcon,
       }}
@@ -89,28 +88,22 @@ export default function App() {
       >
         <div className="flex items-center gap-2">
           <button
-            onClick={handleToggleSettings}
+            onClick={() => dispatch({ type: "TOGGLE", payload: "isToggleOne" })}
             className="p-2 bg-purple-700 text-white rounded"
           >
             <FontAwesomeIcon icon={faGear} />
           </button>
-          <button>
+          <button
+            onClick={() => dispatch({ type: "TOGGLE", payload: "isToggleTwo" })}
+            className="p-2 bg-purple-700 text-white rounded"
+          >
             <FontAwesomeIcon icon={faArrowRotateRight} />
           </button>
         </div>
-        {state.isToggle && <Settings />}
+        {state.isToggleOne && <Settings />}
+        {state.isToggleTwo && <Reset />}
 
-        <div>
-          <h1>Reset Counter ?</h1>
-          <ul>
-            <li className="cursor-pointer" onClick={handleReset}>
-              Yes
-            </li>
-            <li className="cursor-pointer">Cancel</li>
-          </ul>
-        </div>
-
-        {state.isToggle ? "" : <Main />}
+        {!(state.isToggleOne || state.isToggleTwo) && <Main />}
       </div>
     </MyContext.Provider>
   );
