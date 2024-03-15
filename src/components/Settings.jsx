@@ -3,8 +3,13 @@ import Theme from "./Theme";
 import MyContext from "../Context";
 
 export default function Settings() {
-  const { handleToggleClose, FontAwesomeIcon, faCircleXmark } =
-    useContext(MyContext);
+  const {
+    handleToggleClose,
+    FontAwesomeIcon,
+    faCircleXmark,
+    handleChange,
+    handleSave,
+  } = useContext(MyContext);
   return (
     <div className="rounded border-2 border-purple-600 p-2 mt-3">
       <h1 className="font-bold text-3xl">Settings</h1>
@@ -12,15 +17,21 @@ export default function Settings() {
         <label>Set count = </label>
         <input type="number" />
       </div>
-
       <div className="flex items-center mb-3">
         <label>Limit Off / On</label>
 
         <div className="flex">
           <label>Maximum = </label>
-          <input type="number" />
+          <input type="number" onChange={handleChange} />
         </div>
       </div>
+      <button
+        onClick={handleSave}
+        className="bg-purple-500 mb-3 text-white rounded p-2"
+      >
+        Save
+      </button>{" "}
+      {/* Add a save button */}
       <div className="flex items-center mb-3">
         <Theme />
       </div>

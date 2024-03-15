@@ -12,6 +12,8 @@ import Main from "./components/Main";
 import Reset from "./components/Reset";
 const initialCount = {
   count: 0,
+  setCount: "",
+  countInput: "",
   isToggleOne: false,
   isToggleTwo: false,
   selectedColor: "bg-slate-100",
@@ -36,6 +38,11 @@ const reducer = (state, action) => {
       return { ...state, isToggleOne: false, isToggleTwo: false };
     case "CHANGE_THEME":
       return { ...state, selectedColor: action.payload };
+    case "SET_INPUT_VALUE":
+      return { ...state, countInput: action.payload };
+
+    case "SET_COUNT":
+      return { ...state, count: parseInt(state.countInput) }; // U
     default:
       return state;
   }
@@ -51,6 +58,15 @@ export default function App() {
       localStorage.setItem("count", state.count.toString());
     }
   }, [state]);
+
+  const handleChange = (e) => {
+    dispatch({ type: "SET_INPUT_VALUE", payload: e.target.value });
+  };
+
+  const handleSave = () => {
+    dispatch({ type: "SET_COUNT" }); // Dispatch action to update count
+    handleToggleClose(); // Close the settings modal
+  };
 
   const handleToggleCount = (idx) => {
     if (idx === 0) {
@@ -77,6 +93,8 @@ export default function App() {
       value={{
         state,
         buttonText,
+        handleChange,
+        handleSave,
         handleToggleCount,
         handleToggleClose,
         handleChangeTheme,
