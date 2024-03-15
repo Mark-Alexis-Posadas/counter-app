@@ -25,13 +25,15 @@ const reducer = (state, action) => {
       return { ...state, count: state.count - 1 };
 
     case "RESET":
-      return { ...state, count: (state.count = 0) };
+      return { ...state, count: (state.count = 0), isToggleTwo: false };
 
-    case "TOGGLE":
-      return { ...state, [action.payload]: !state[action.payload] };
+    case "TOGGLE_SETTINGS":
+      return { ...state, isToggleOne: true, isToggleTwo: false };
+    case "TOGGLE_RESET":
+      return { ...state, isToggleOne: false, isToggleTwo: true };
 
     case "TOGGLE_CLOSE":
-      return { ...state, isToggle: false };
+      return { ...state, isToggleOne: false, isToggleTwo: false };
     case "CHANGE_THEME":
       return { ...state, selectedColor: action.payload };
     default:
@@ -88,14 +90,14 @@ export default function App() {
       >
         <div className="flex items-center gap-2">
           <button
-            onClick={() => dispatch({ type: "TOGGLE", payload: "isToggleOne" })}
-            className="p-2 bg-purple-700 text-white rounded"
+            onClick={() => dispatch({ type: "TOGGLE_SETTINGS" })}
+            className="p-2 bg-purple-700 text-white rounded cursor-pointer"
           >
             <FontAwesomeIcon icon={faGear} />
           </button>
           <button
-            onClick={() => dispatch({ type: "TOGGLE", payload: "isToggleTwo" })}
-            className="p-2 bg-purple-700 text-white rounded"
+            onClick={() => dispatch({ type: "TOGGLE_RESET" })}
+            className="p-2 bg-purple-700 text-white rounded cursor-pointer"
           >
             <FontAwesomeIcon icon={faArrowRotateRight} />
           </button>
