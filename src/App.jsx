@@ -11,12 +11,12 @@ import MyContext from "./Context";
 import Main from "./components/Main";
 import Reset from "./components/Reset";
 const initialCount = {
-  count: 0,
+  count: parseInt(localStorage.getItem("count")) || 0,
   setCount: "",
   countInput: "",
   isToggleOne: false,
   isToggleTwo: false,
-  selectedColor: "bg-slate-100",
+  selectedColor: localStorage.getItem("theme") || "bg-slate-100", // Get theme from local storage or default to "bg-slate-100"
 };
 
 const reducer = (state, action) => {
@@ -37,6 +37,7 @@ const reducer = (state, action) => {
     case "TOGGLE_CLOSE":
       return { ...state, isToggleOne: false, isToggleTwo: false };
     case "CHANGE_THEME":
+      localStorage.setItem("theme", action.payload); // Save selected theme to local storage
       return { ...state, selectedColor: action.payload };
     case "SET_INPUT_VALUE":
       return { ...state, countInput: action.payload };
@@ -60,7 +61,7 @@ export default function App() {
   }, [state]);
 
   useEffect(() => {
-    dispatch({ type: "SET_INPUT_VALUE", payload: state.count });
+    dispatch({ type: "SET_INPUT_VALUE", payload: parseInt(state.count) });
   }, [state.count, dispatch]);
 
   const handleChange = (e) => {
