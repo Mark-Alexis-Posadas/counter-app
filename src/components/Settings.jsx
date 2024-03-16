@@ -10,6 +10,7 @@ export default function Settings() {
     faCircleXmark,
     handleChange,
     handleSave,
+    handleToggleMax,
   } = useContext(MyContext);
 
   return (
@@ -17,14 +18,30 @@ export default function Settings() {
       <h1 className="font-bold text-3xl">Settings</h1>
       <div className="flex items-center my-3">
         <label>Set count = </label>
-        <input type="number" value={state.countInput} onChange={handleChange} />
+        <input
+          type="number"
+          value={state.countInput}
+          onChange={handleChange}
+          className="w-12 rounded px-2 ml-2"
+        />
       </div>
-      <div className="flex items-center mb-3">
-        <label>Limit Off / On</label>
-
+      <div className="flex items-start flex-col mb-3">
+        <div className="flex items-center ">
+          <label>Limit</label>
+          <button
+            className="bg-black mx-2 rounded p-2 text-white"
+            onClick={handleToggleMax}
+          >
+            {state.isInputEnabled ? "On" : "Off"}
+          </button>
+        </div>
         <div className="flex">
           <label>Maximum = </label>
-          <input type="number" />
+          <input
+            type="number"
+            className="w-12 rounded px-2 ml-2"
+            disabled={!state.isInputEnabled}
+          />
         </div>
       </div>
       <button

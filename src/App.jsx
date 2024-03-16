@@ -16,7 +16,8 @@ const initialCount = {
   countInput: "",
   isToggleOne: false,
   isToggleTwo: false,
-  selectedColor: localStorage.getItem("theme") || "bg-slate-100", // Get theme from local storage or default to "bg-slate-100"
+  selectedColor: localStorage.getItem("theme") || "bg-slate-100",
+  isInputEnabled: false,
 };
 
 const reducer = (state, action) => {
@@ -44,6 +45,9 @@ const reducer = (state, action) => {
 
     case "SET_COUNT":
       return { ...state, count: parseInt(state.countInput) };
+
+    case "TOGGLE_MAX":
+      return { ...state, isInputEnabled: !state.isInputEnabled };
     default:
       return state;
   }
@@ -93,6 +97,10 @@ export default function App() {
     dispatch({ type: "CHANGE_THEME", payload: color });
   };
 
+  const handleToggleMax = () => {
+    dispatch({ type: "TOGGLE_MAX" });
+  };
+
   return (
     <MyContext.Provider
       value={{
@@ -104,6 +112,7 @@ export default function App() {
         handleToggleClose,
         handleChangeTheme,
         handleReset,
+        handleToggleMax,
         faCircleXmark,
         FontAwesomeIcon,
         dispatch,
