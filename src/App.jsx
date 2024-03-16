@@ -59,13 +59,17 @@ export default function App() {
     }
   }, [state]);
 
+  useEffect(() => {
+    dispatch({ type: "SET_INPUT_VALUE", payload: state.count });
+  }, [state.count, dispatch]);
+
   const handleChange = (e) => {
     dispatch({ type: "SET_INPUT_VALUE", payload: e.target.value });
   };
 
   const handleSave = () => {
-    dispatch({ type: "SET_COUNT" }); // Dispatch action to update count
-    handleToggleClose(); // Close the settings modal
+    dispatch({ type: "SET_COUNT" });
+    handleToggleClose();
   };
 
   const handleToggleCount = (idx) => {
@@ -101,6 +105,7 @@ export default function App() {
         handleReset,
         faCircleXmark,
         FontAwesomeIcon,
+        dispatch,
       }}
     >
       <div
