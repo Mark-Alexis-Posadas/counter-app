@@ -30,8 +30,8 @@ export default function Settings() {
         className="bg-purple-500 mb-3 text-white rounded p-2"
       >
         Save
-      </button>{" "}
-      {/* Add a save button */}
+      </button>
+
       <div className="flex items-center mb-3">
         <Theme />
       </div>

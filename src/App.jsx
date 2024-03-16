@@ -42,7 +42,7 @@ const reducer = (state, action) => {
       return { ...state, countInput: action.payload };
 
     case "SET_COUNT":
-      return { ...state, count: parseInt(state.countInput) }; // U
+      return { ...state, count: parseInt(state.countInput) };
     default:
       return state;
   }
