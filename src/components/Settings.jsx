@@ -15,19 +15,37 @@ export default function Settings() {
 
   return (
     <div className="rounded border-2 border-purple-600 p-2 mt-3">
-      <h1 className="font-bold text-3xl">Settings</h1>
+      <h1
+        className={`${
+          state.selectedColor === "bg-white" ? "text-black" : "text-white"
+        } font-bold text-3xl`}
+      >
+        Settings
+      </h1>
       <div className="flex items-center my-3">
-        <label>Set count = </label>
+        <label
+          className={`${
+            state.selectedColor === "bg-white" ? "text-black" : "text-white"
+          }`}
+        >
+          Set count =
+        </label>
         <input
           type="number"
           value={state.countInput}
           onChange={handleChange}
-          className="w-12 rounded px-2 ml-2"
+          className="w-12 rounded px-2 ml-2 border-2 border-slate-500"
         />
       </div>
       <div className="flex items-start flex-col mb-3">
         <div className="flex items-center ">
-          <label>Limit</label>
+          <label
+            className={`${
+              state.selectedColor === "bg-white" ? "text-black" : "text-white"
+            }`}
+          >
+            Limit
+          </label>
           <button
             className="bg-black mx-2 rounded p-2 text-white"
             onClick={handleToggleMax}
@@ -36,10 +54,18 @@ export default function Settings() {
           </button>
         </div>
         <div className="flex">
-          <label>Maximum = </label>
+          <label
+            className={`${
+              state.selectedColor === "bg-white" ? "text-black" : "text-white"
+            }`}
+          >
+            Maximum ={" "}
+          </label>
           <input
             type="number"
-            className="w-12 rounded px-2 ml-2"
+            className={`${
+              !state.isInputEnabled ? "cursor-not-allowed " : ""
+            }w-12 rounded px-2 ml-2 border-2 border-slate-500`}
             disabled={!state.isInputEnabled}
           />
         </div>
