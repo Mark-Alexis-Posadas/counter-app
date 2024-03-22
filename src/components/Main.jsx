@@ -5,7 +5,13 @@ export default function Main() {
   const { state, buttonText, handleToggleCount } = useContext(MyContext);
   return (
     <div className="w-72">
-      <h1 className="text-center font-bold text-9xl">{state.count}</h1>
+      <h1
+        className={`${
+          state.selectedColor === "bg-black" ? "text-white" : "text-black"
+        } text-center font-bold text-9xl`}
+      >
+        {state.count}
+      </h1>
       <div
         className={`flex items-center w-full ${
           state.count === 0 ? "justify-end" : "justify-between"
