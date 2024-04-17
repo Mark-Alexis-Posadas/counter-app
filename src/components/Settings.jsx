@@ -67,6 +67,8 @@ export default function Settings() {
               !state.isInputEnabled ? "cursor-not-allowed " : ""
             }w-12 rounded px-2 ml-2 border-2 border-slate-500`}
             disabled={!state.isInputEnabled}
+            value={state.countInput}
+            onChange={handleChange}
           />
         </div>
       </div>

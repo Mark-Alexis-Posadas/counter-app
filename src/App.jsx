@@ -23,31 +23,32 @@ const initialCount = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "INCREMENT":
-      return { ...state, count: state.count + 1 };
+      if (!state.isInputEnabled || state.count < state.maxCount) {
+        return { ...state, count: state.count + 1 };
+      } else {
+        return state;
+      }
     case "DECREMENT":
       return { ...state, count: state.count - 1 };
-
     case "RESET":
-      return { ...state, count: (state.count = 0), isToggleTwo: false };
-
+      return { ...state, count: 0, isToggleTwo: false };
     case "TOGGLE_SETTINGS":
       return { ...state, isToggleOne: true, isToggleTwo: false };
     case "TOGGLE_RESET":
       return { ...state, isToggleOne: false, isToggleTwo: true };
-
     case "TOGGLE_CLOSE":
       return { ...state, isToggleOne: false, isToggleTwo: false };
     case "CHANGE_THEME":
-      localStorage.setItem("theme", action.payload); // Save selected theme to local storage
+      localStorage.setItem("theme", action.payload);
       return { ...state, selectedColor: action.payload };
     case "SET_INPUT_VALUE":
       return { ...state, countInput: action.payload };
-
     case "SET_COUNT":
       return { ...state, count: parseInt(state.countInput) };
-
     case "TOGGLE_MAX":
       return { ...state, isInputEnabled: !state.isInputEnabled };
+    case "SET_MAX_COUNT":
+      return { ...state, maxCount: parseInt(state.countInput) };
     default:
       return state;
   }
@@ -74,6 +75,9 @@ export default function App() {
 
   const handleSave = () => {
     dispatch({ type: "SET_COUNT" });
+    if (state.isInputEnabled) {
+      dispatch({ type: "SET_MAX_COUNT" });
+    }
     handleToggleClose();
   };
 
